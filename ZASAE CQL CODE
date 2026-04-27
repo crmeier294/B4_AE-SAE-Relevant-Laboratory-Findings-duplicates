@@ -1,0 +1,29 @@
+select @HDR.Site.Number as `Site`
+     , @HDR.Subject.Name as `Participant`
+     , a1.@Form.SeqNbr as `Ref Num 1`
+     , a1.ZASAE_ZATERM as `Test Name 1`
+     , codedterm(a1.ZASAE_ZATERM,'LLT') as `Test Name 1 LLT`
+     , a1.ZASAE_ZADAT as `ZASAE 1 Specimen Collection Date`
+     , a.ZASAERow as `Ref Num 2`
+     , a.ZASAE_ZATERM as `Test Name 2`
+     , a.LLT_NAME as `Test Name 2 LLT`
+     , a.SpecCollDt as `ZASAE 2 Specimen Collection Date`
+from ZASAE a1,
+    (select
+       @HDR.Subject.ID as SubjID,
+       @HDR.Site.Number,
+       @HDR.Subject.Name,
+       a.@Form.SeqNbr as ZASAERow,
+       a.ZASAE_ZATERM,
+       codedterm(a.ZASAE_ZATERM,'LLT') as LLT_NAME,
+       a.ZASAE_ZADAT as SpecCollDt
+     from ZASAE a
+     where @Form.Status = 'submitted__v') as a
+
+where @Form.Status = 'submitted__v'
+  and @HDR.Subject.ID = a.SubjID
+  and a1.@Form.SeqNbr < a.ZASAERow
+  and codedterm(a1.ZASAE_ZATERM,'LLT') = a.LLT_NAME
+  and a1.ZASAE_ZADAT = a.SpecCollDt
+
+order by @HDR.Site.Number, @HDR.Subject.Name, a1.@Form.SeqNbr, a1.ZASAE_ZADAT
