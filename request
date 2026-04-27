@@ -1,0 +1,27 @@
+The following listing is already programmed in Veeva CDB Workbench. ***CQL PROGRAMMING LANGUAGE. NOT SQL.***
+
+-Listing Title: AE/SAE Relevant Laboratory Findings duplicates
+
+-Objective: 
+This listing will list participants when ZASAE Specimen Collection Date and ZASAE Test Name are entered more than once for one participant.
+
+
+******************************
+-Programming Guide/Notes:
+Output when two (or more) ZASAE entries have the same Specimen Collection Date and Test Name ( LLT after encoding).
+
+
+******************************
+
+-Forms Used: ZASAE
+
+
+******************************
+
+*I've attached the Study Design Specification (SDS) for ZASAE form. Use the SDS file to determine source columns to use and program this listing. NOTE: use column P - Item Name - as the source column. 
+
+*I've also attached my current CQL CODE for this listing as well as it's output.
+
+*I've also attached data output for ZASAE form.
+
+*Ensure the cql code for this listing correctly aligns with the objective and programming notes/guide and outputs correctly.*
